@@ -1,0 +1,10 @@
+{
+    "name": "WishyWashy",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "WishyWashy is a google chrome gift wishlist app",
+    "browser_action": {
+        "default_icon": "gift.png"
+        
+    }
+}
