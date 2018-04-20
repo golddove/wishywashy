@@ -1,0 +1,32 @@
+[debug] [2018-04-20T16:58:47.568Z] ----------------------------------------------------------------------
+[debug] [2018-04-20T16:58:47.571Z] Command:       /usr/bin/node /usr/local/bin/firebase serve
+[debug] [2018-04-20T16:58:47.571Z] CLI Version:   3.18.4
+[debug] [2018-04-20T16:58:47.571Z] Platform:      linux
+[debug] [2018-04-20T16:58:47.571Z] Node Version:  v6.11.4
+[debug] [2018-04-20T16:58:47.571Z] Time:          Fri Apr 20 2018 12:58:47 GMT-0400 (EDT)
+[debug] [2018-04-20T16:58:47.571Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-20T16:58:47.582Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-20T16:58:47.582Z] > authorizing via signed-in user
+[debug] [2018-04-20T16:58:47.584Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/wishywashy-cs321  
+  
+ Fri Apr 20 2018 12:58:47 GMT-0400 (EDT)
+[debug] [2018-04-20T16:58:48.637Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-20T16:58:48.639Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/wishywashy-cs321/tokens  
+  
+ Fri Apr 20 2018 12:58:48 GMT-0400 (EDT)
+[debug] [2018-04-20T16:58:48.991Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-20T16:58:48.994Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/wishywashy-cs321  
+  
+ Fri Apr 20 2018 12:58:48 GMT-0400 (EDT)
+[debug] [2018-04-20T16:58:49.213Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/the1jonbrown/WebstormProjects/wishywashy'...
+[info] 
+[debug] [2018-04-20T16:58:49.222Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/114079785486/clients/_:getWebAppConfig  
+  
+ Fri Apr 20 2018 12:58:49 GMT-0400 (EDT)
+[debug] [2018-04-20T16:58:49.484Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
