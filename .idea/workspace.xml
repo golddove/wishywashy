@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2fc9e84-b9e3-4a8a-85e6-8678faf61744" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/firebase-debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="a2fc9e84-b9e3-4a8a-85e6-8678faf61744" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -21,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="43" column="54" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+            <state relative-caret-position="440">
+              <caret line="22" column="11" lean-forward="true" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -173,25 +169,24 @@
       <workItem from="1524241623766" duration="2179000" />
       <workItem from="1524243911915" duration="1512000" />
       <workItem from="1524253670670" duration="596000" />
-      <workItem from="1524263360164" duration="4102000" />
+      <workItem from="1524263360164" duration="4289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16969000" />
+    <option name="totallyTimeSpent" value="17156000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1680" height="960" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1827381" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1827381" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3269639" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.20239522" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.20239522" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -347,8 +342,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="43" column="54" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+        <state relative-caret-position="440">
+          <caret line="22" column="11" lean-forward="true" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
         </state>
       </provider>
     </entry>
