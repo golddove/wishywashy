@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "hosting": {
     "public": "public",
     "ignore": [
@@ -12,5 +13,9 @@
         "destination": "/index.html"
       }
     ]
+=======
+  "database": {
+    "rules": "database.rules.json"
+>>>>>>> Nwol-patch-1
   }
 }
