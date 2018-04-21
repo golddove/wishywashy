@@ -3,55 +3,81 @@
 <head>
     <title>Registration form</title>
     <link rel="stylesheet" type="text/css" media="screen" href="register.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet">
     <script src="register.js"></script>
 </head>
 <body>
-	<h1>Register</h1>
+    <div class = "popupContainer">
+        <h1>Sign Up</h1>
 
-	<form>
+        <form>
 
-		<label for = "FirstName">First Name: </label>
-		<input type = "text" id = "FirstName" placeholder = "John" required>
+            <label for = "FirstName">First Name: </label>
+            <input type = "text" id = "FirstName" placeholder = "John" required>
 
-		<label for = "LastName">Last Name: </label>
-		<input type = "text" id = "LastName" placeholder = "Smith" required>
+            <label for = "LastName">Last Name: </label>
+            <input type = "text" id = "LastName" placeholder = "Smith" required>
 
-		<div>
-			<label for = "Male">Male </label>
-			<input id = "Male" type = "radio" value = "Male">
 
-			<label for = "Female">Female </label>
-			<input id = "Female" type="radio" value="Female">
+            <label for = "Email">Email: </label>
+            <input name="email" id="Email" type="email" placeholder = "your email" required>
+            <label for = "Password">Password: </label>
+            <input name="password" id="Password" type="password" pattern=".{5,10}" title="5 to 10 characters" placeholder = "Password" required>
+            
 
-			<label for = "Other">Other </label>
-			<input id = "Other" type="radio" value="Other">
-		</div>
+            <label for = "Birthday">Birthday: </label>
+            <select id="Birthday" name="Month">
+                <option>Month</option>
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>July</option>
+                <option>August</option>
+                <option>September</option>
+                <option>October</option>
+                <option>November</option>
+                <option>December</option>
+            </select>
 
-		<div>
-			<label for = "Email">Email: </label>
-			<input name="email" id="Email" type="email" placeholder = "your email" required>
-			<label for = "Password">Password: </label>
-			<input name="password" id="Password" type="password" pattern=".{5,10}" title="5 to 10 characters" placeholder = "Password" required>
-		</div>
-
-		<div>
-			<label for = "Birthday">Birthday: </label>
-			<select id="Birthday" name="Month">
-				<option>Month</option>
-				<option>January</option>
-				<option>February</option>
-				<option>March</option>
-			</select>
-
-			<select name = "Day">
-				<option>Day</option>
-				<option>1</option>
-				<option>2</option>
+            <select name = "Day" id = "day">
+                <option>Day</option>
+                <option>1</option>
+                <option>2</option>
                 <option>3</option>
                 <option>4</option>
-			</select>
-			
-			<select name="Year">
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+                <option>31</option>
+            </select>
+            
+            <select name="Year" id = "year">
                     <option value="2013">2013</option>
                     <option value="2012">2012</option>
                     <option value="2011">2011</option>
@@ -162,8 +188,8 @@
                     <option value="1906">1906</option>
                     <option value="1905">1905</option>
                 </select>
-		</div>
-		<input type = "submit">
-	</form>
+            <input type = "submit">
+        </form>
+    </div>
 </body>
 </html>
