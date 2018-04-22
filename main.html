@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>main</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDM-VKsL42qVJB0C5wIqbPyamp2MMuKn2I",
+            authDomain: "wishywashy-cs321.firebaseapp.com",
+            databaseURL: "https://wishywashy-cs321.firebaseio.com",
+            projectId: "wishywashy-cs321",
+            storageBucket: "wishywashy-cs321.appspot.com",
+            messagingSenderId: "114079785486"
+        };
+        firebase.initializeApp(config)
+    </script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class = "popupContainer">
+        <p>Welcome to Wishy/Washy</p>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <button onclick="googleLogin()">
+            Login with Google
+        </button>
+    </div>
+</body>
+</html>
