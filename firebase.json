@@ -1,21 +1,5 @@
 {
-<<<<<<< HEAD
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-=======
   "database": {
     "rules": "database.rules.json"
->>>>>>> Nwol-patch-1
   }
 }
