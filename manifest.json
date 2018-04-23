@@ -2,10 +2,19 @@
     "name": "WishyWashy",
     "version": "1.0",
     "manifest_version": 2,
-    "description": "WishyWashy is a google chrome gift wishlist app",
+    "description": "WishyWashy is a google chrome gift wish list app",
+    "icons": {
+        "32":"gift.png"
+    },
     "browser_action": {
+        "default_title": "WishyWashy Wish list",
         "default_icon": "gift.png",
-        "default_popup": "wishywashy.html"
-        
-    }
+        "default_popup": "input.html"
+    },
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "https://*/*",
+        "pageCapture"
+    ]
 }
