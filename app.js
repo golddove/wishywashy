@@ -32,6 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 var nameInput = document.createElement("input");
                 nameInput.setAttribute("type", "text");
                 nameInput.setAttribute("placeholder", "Item Name");
+                chrome.tabs.executeScript( {
+                    code: "window.getSelection().toString();"
+                }, function(selection) {
+                    nameInput.value = selection[0];
+                });
+
                 var noteInput = document.createElement("input");
                 noteInput.setAttribute("type", "text");
                 noteInput.setAttribute("placeholder", "Notes (optional)");
