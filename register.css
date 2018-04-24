@@ -42,6 +42,10 @@ input{
     margin-right: auto;
 }
 
+#Month{
+    margin-left:64px;
+}
+
 #Birthday{
     margin-left:64px;
 }
