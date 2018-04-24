@@ -28,6 +28,35 @@ document.addEventListener('DOMContentLoaded', function() {
             var addButton = document.createElement("button");
             addButton.innerText = "Wish this Page!";
             popupContainer.appendChild(addButton);
+            addButton.addEventListener("click", function() {
+                var newItemForm = document.createElement("form");
+                var nameInput = document.createElement("input");
+                nameInput.setAttribute("type", "text");
+                nameInput.setAttribute("placeholder", "Item Name");
+                var noteInput = document.createElement("input");
+                noteInput.setAttribute("type", "text");
+                noteInput.setAttribute("placeholder", "Notes (optional)");
+                var priceInput = document.createElement("input");
+                priceInput.setAttribute("type", "number");
+                priceInput.setAttribute("placeholder", "$0.00");
+                priceInput.setAttribute("step", "0.01");
+                priceInput.setAttribute("min", "0");
+                var submitInput = document.createElement("input");
+                submitInput.setAttribute("type", "submit");
+                submitInput.style.display = "none";
+                newItemForm.appendChild(nameInput);
+                newItemForm.appendChild(priceInput);
+                newItemForm.appendChild(noteInput);
+                newItemForm.appendChild(submitInput);
+                addButton.replaceWith(newItemForm);
+                newItemForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    console.log("whaa");
+                    var submittedLabel = document.createElement("label");
+                    submittedLabel.innerText = "Wished!";
+                    newItemForm.replaceWith(submittedLabel);
+                });
+            });
         }
         else {
             var googleButton = document.createElement("button");
