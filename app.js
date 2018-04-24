@@ -18,10 +18,21 @@ document.addEventListener('DOMContentLoaded', function() {
     if(googleButton) {
         console.log("found button");
         googleButton.addEventListener("click", createUser);
+
+        // Testing wishlistItems method
+        // console.log(wishlistItems(1));
+        // console.log(wishlistItems("FcemVZGPbyTqlnfaBJW5009NbiJ3"));
+        // console.log(wishlistItems(0));
+        // console.log(wishlistItems(2));
+
+        // Testing findUser method
+        console.log(findUser("hello"));
+        console.log(findUser("ddo"));
+        console.log(findUser("@gmail"));
+        console.log(findUser("n"));
+        console.log(findUser(""));
     }
 });
-
-
 
 /**
  * Adds a new User to the Database. Assigns a
@@ -31,8 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param email
  * @param password
  */
-function createUser()
-{
+function createUser() {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
         firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null, token)).then(function(user) {
             //firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -73,8 +83,7 @@ function createUser()
  * @param note
  * @param price
  */
-function createItem(url, name = "", note = "", price = 0)
-{
+function createItem(url, name = "", note = "", price = 0) {
     chrome.storage.sync.get(['firebase-auth-uid'], function(result){
         var uid = result['firebase-auth-uid'];
         var wishlistRef = database.ref("users/" + uid + "/wishlist");
@@ -101,32 +110,29 @@ function createItem(url, name = "", note = "", price = 0)
  * @param note
  * @param price
  */
-function editItem(itemID, url = undefined, name = undefined, note = undefined, price = undefined)
-{
+function editItem(itemID, url = undefined, name = undefined, note = undefined, price = undefined) {
     var updates = {};
     if(url) {
         updates.url = url;
     }
-    if(url) {
+    if(name) {
         updates.name = name;
     }
-    if(url) {
+    if(note) {
         updates.note = note;
     }
-    if(url) {
+    if(price) {
         updates.price = price;
     }
     var itemRef = database.ref("items/" + itemID);
     itemRef.update(updates);
-``
 }
 
 /**
  * Deletes an Item by ID.
  * @param itemID
  */
-function deleteItem(itemID)
-{
+function deleteItem(itemID) {
     var itemRef = database.ref("items/" + itemID.toString())
     var gifterID = itemRef.getAttribute("gifter");
     database.ref("users/" + gifterID + "/reservations").remove(itemID);
@@ -138,8 +144,7 @@ function deleteItem(itemID)
  * @param UserID ID of the user trying to reserve.
  * @param itemID ID of item to be reserved.
  */
-function reserve(itemID)
-{
+function reserve(itemID) {
     chrome.storage.sync.get(['firebase-auth-uid'], function(result){
         var uid = result['firebase-auth-uid'];
         var ReservRef = database.ref("users/" + uid + "/reservations");
@@ -153,23 +158,41 @@ function reserve(itemID)
  * users whose username contains the given string.
  * @param string Search string
  */
-function findUser(string)
-{
-    ref = database.ref("/users");
+function findUser(string) {
+    users = database.ref("/users");
     var matches = new Array();
 
-    ref.once("value").then(function(snapshot){
-        snapshot.forEach(function(childSnapshot){
-            var key = childSnapshot.key; //singular user
-            var data = childSnapshot.val(); //user contents
-            var username = data.getAttribute("username");
+    users.once("value").then(function(userList){
+        userList.forEach(function(user){
+            var username = user.child("username").val();
             if (username.includes(string))
             {
-                matches.push(database.ref("users/" + key));
+                matches.push(user.toJSON());
             }
         })
        });
     return matches;
 }
 
+/**
+ * Given a userID, returns an Array of objects
+ * @param userID
+ * @returns {any[]}
+ */
+function wishlistItems (userID) {
+    if (database.ref("user/" + userID) == undefined) {return new Array;}
 
+    var wishlistRef = database.ref("users/" + userID + "/wishlist");
+    var items = new Array;
+
+    wishlistRef.once("value").then(function(wishlist){
+        wishlist.forEach(function(itemID) { // snapshot is the wishlist
+            var key = itemID.key; //singular itemID
+            var itemRef = database.ref("items/" + key);
+            itemRef.once("value").then(function(item){
+               items.push(item.toJSON());
+            });
+        });
+    });
+    return items;
+}
