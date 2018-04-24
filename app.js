@@ -85,11 +85,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     otherPopupContainer = document.createElement("div");
                     var otherWishlistContainer = document.createElement("div");
                     var backButton = document.createElement("button");
-                    backButton.innerText = "< Back";
+                    backButton.innerText = "<";
                     backButton.addEventListener("click", function() {
                         otherPopupContainer.replaceWith(popupContainer);
                     })
+                    backButton.style.display = "inline";
+                    var titleText = document.createElement("p");
+                    titleText.innerText = "Welcome to Wishy/Washy";
+                    var titleNameText = document.createElement("p");
+                    titleNameText.innerText = "    " + user.name;
+                    titleNameText.style.display = "inline";
+                    otherPopupContainer.appendChild(titleText);
                     otherPopupContainer.appendChild(backButton);
+                    otherPopupContainer.appendChild(titleNameText);
                     otherPopupContainer.appendChild(otherWishlistContainer);
                     var otherWishlist = [];
 
@@ -115,8 +123,41 @@ document.addEventListener('DOMContentLoaded', function() {
                         link.appendChild(priceLabel);
                         var noteLabel = document.createElement("label");
                         noteLabel.innerText = item["note"];
+                        var reserveButton = document.createElement("button");
+                        console.log(item.gifter);
+                        if(item.gifter==uid) {
+                            reserveButton.style.display = "inline";
+                            reserveButton.innerText="\u2715";
+                        } else if (item.gifter) {
+                            reserveButton.style.display = "none";
+                        } else {
+                            reserveButton.style.display = "inline";
+                            reserveButton.innerText="\u2714";
+                        }
+                        reserveButton.addEventListener("click", function() {
+                            if(reserveButton.style.display === "none") {
+                                return;
+                            }
+                            if(reserveButton.innerText==="\u2715") {
+                                console.log("unreserving??");
+                                var itemRef = database.ref("items/"+itemID).update({gifter: false});
+                                var reserveRef = database.ref("users/"+uid+"/reservations");
+                                reserveRef.child(itemID).remove();
+                                console.log("changing icon...");
+                                reserveButton.innerText="\u2714";
+                            } else {
+                                console.log("reserving!");
+                                var itemRef = database.ref("items/"+itemID).update({gifter: uid});
+                                var reserveRef = database.ref("users/"+uid+"/reservations");
+                                reserveRef.child(itemID).set(true);
+                                reserveButton.innerText="\u2715"
+                            }
+                        })
+                        itemContainer.appendChild(document.createElement("br"));
+                        itemContainer.appendChild(document.createElement("br"));
                         itemContainer.appendChild(link);
                         itemContainer.appendChild(noteLabel);
+                        itemContainer.appendChild(reserveButton);
                         otherWishlistContainer.appendChild(itemContainer);
                         otherWishlist.push({
                             id : itemID,
@@ -125,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             url : item["url"],
                             noteLabel,
                             itemContainer,
+                            reserveButton,
                         });
                     }, function(itemID) {
                         var wishlistItem = otherWishlist.find(function(wItem) {
@@ -133,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         wishlistItem.itemContainer.remove();
                         wishlist.splice(otherWishlist.indexOf(wishlistItem),1);
                     }, function(itemID, item) {
+                        console.log("updating!");
                         var wishlistItem = wishlist.find(function(wItem) {
                             return wItem.id == itemID;
                         });
@@ -140,6 +183,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         wishlistItem.nameLabel.innerText = item['name'];
                         wishlistItem.noteLabel.innerText = item['note'];
                         wishlistItem.url = item['url'];
+                        // if(item.gifter==uid) {
+                        //     wishlistItem.reserveButton.style.display = "inline";
+                        //     wishlistItem.reserveButton.innerText="\u2715";
+                        // } else if (item.gifter) {
+                        //     wishlistItem.reserveButton.style.display = "none";
+                        // } else {
+                        //     wishlistItem.reserveButton.style.display = "inline";
+                        //     wishlistItem.reserveButton.innerText="\u2714";
+                        // }
                     });
                     popupContainer.replaceWith(otherPopupContainer);
                 });
@@ -197,6 +249,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.appendChild(priceLabel);
                 var noteLabel = document.createElement("label");
                 noteLabel.innerText = item["note"];
+                itemContainer.appendChild(document.createElement("br"));
+                itemContainer.appendChild(document.createElement("br"));
                 itemContainer.appendChild(link);
                 itemContainer.appendChild(noteLabel);
                 wishlistContainer.appendChild(itemContainer);
@@ -414,6 +468,7 @@ function wishlistItems (userID, callbackAdded = () => {}, callbackRemoved = () =
     });
 
     wishlistRef.on("child_changed", function(itemSnap){
+        console.log("child changed!!");
         var itemID = itemSnap.key; //singular itemID
         var itemRef = database.ref("items/" + itemID);
         itemRef.once("value").then(function(item) {

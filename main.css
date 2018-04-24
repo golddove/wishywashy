@@ -2,18 +2,20 @@ body{
     background: url("http://cleancanvas.herokuapp.com/img/backgrounds/color-splash.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
+    color: white;
 }
 p{
     font-family: Raleway;
     font-size:13px;
     font-weight:800;
-    width: 30%;
+    /*width: 30%;*/
     text-transform: uppercase;
     margin-left:auto;
     margin-right: auto;
+    white-space: nowrap;
 }
 .popupContainer{
-    width: 300px;
+    min-width: 500px;
     min-height: 300px;
     max-height: 500px;
 
