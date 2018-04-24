@@ -240,10 +240,17 @@ function editItem(itemID, url = undefined, name = undefined, note = undefined, p
  * @param itemID
  */
 function deleteItem(itemID) {
-    var itemRef = database.ref("items/" + itemID.toString())
-    var gifterID = itemRef.getAttribute("gifter");
-    database.ref("users/" + gifterID + "/reservations").remove(itemID);
-    itemRef.remove();
+    var itemRef = database.ref("items/" + itemID)
+    var gifterRef = itemRef.child("gifter");
+    gifterRef.once("value").then(function (gifter){
+       if (gifter.val() != false)
+       {
+           database.ref("users/" + gifterID + "/reservations").remove(itemID);
+       }
+    });
+    database.ref("items").remove(itemID);
+
+
 }
 
 /**
@@ -255,8 +262,8 @@ function reserve(itemID) {
     chrome.storage.sync.get(['firebase-auth-uid'], function(result){
         var uid = result['firebase-auth-uid'];
         var ReservRef = database.ref("users/" + uid + "/reservations");
-        ReservRef.setAttribute(itemID, true);
-        var itemRef = database.ref("items/" + itemID).setAttribute("gifter", uid);
+        ReservRef.push({itemID: true});
+        var itemRef = database.ref("items/" + itemID).update({gifter: uid});
     });
 }
 
