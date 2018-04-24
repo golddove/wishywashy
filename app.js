@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 newItemForm.appendChild(noteInput);
                 newItemForm.appendChild(submitInput);
                 addButton.replaceWith(newItemForm);
+                searchBar.remove();
                 newItemForm.addEventListener("submit", function(e) {
                     e.preventDefault();
                     chrome.tabs.query({
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }, function([tab]) {
                         console.log(tab);
                         createItem(tab.url, nameInput.value, noteInput.value, priceInput.value, function() {
-                            newItemForm.remove();
+                            newItemForm.replaceWith(searchBar);
                         });
                     });
                 });
@@ -75,6 +76,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 unameLabel.style.display = "block";
                 userContainer.appendChild(nameLabel);
                 userContainer.appendChild(unameLabel);
+                var otherPopupContainer = undefined;
+                userContainer.addEventListener("click", function() {
+                    if (otherPopupContainer) {
+                        popupContainer.replaceWith(otherPopupContainer);
+                        return;
+                    }
+                    otherPopupContainer = document.createElement("div");
+                    var otherWishlistContainer = document.createElement("div");
+                    var backButton = document.createElement("button");
+                    backButton.innerText = "< Back";
+                    backButton.addEventListener("click", function() {
+                        otherPopupContainer.replaceWith(popupContainer);
+                    })
+                    otherPopupContainer.appendChild(backButton);
+                    otherPopupContainer.appendChild(otherWishlistContainer);
+                    var otherWishlist = [];
+
+                    wishlistItems(userID, function(itemID, item) {
+                        console.log("adding item");
+                        var itemContainer = document.createElement("div");
+                        var nameLabel = document.createElement("label");
+                        nameLabel.innerText = item['name'];
+                        var priceLabel = document.createElement("label");
+                        priceLabel.innerText = " $" + item['price'];
+                        priceLabel.style['font-style'] = 'italic';
+                        var link = document.createElement("a");
+                        link.addEventListener("click", function() {
+                            var wishlistItem = otherWishlist.find(function(wItem) {
+                                return wItem.id == itemID;
+                            });
+                            chrome.tabs.create({
+                                url : wishlistItem.url,
+                            });
+                        });
+                        link.style.display = "block";
+                        link.appendChild(nameLabel);
+                        link.appendChild(priceLabel);
+                        var noteLabel = document.createElement("label");
+                        noteLabel.innerText = item["note"];
+                        itemContainer.appendChild(link);
+                        itemContainer.appendChild(noteLabel);
+                        otherWishlistContainer.appendChild(itemContainer);
+                        otherWishlist.push({
+                            id : itemID,
+                            nameLabel,
+                            priceLabel,
+                            url : item["url"],
+                            noteLabel,
+                            itemContainer,
+                        });
+                    }, function(itemID) {
+                        var wishlistItem = otherWishlist.find(function(wItem) {
+                            return wItem.id == itemID;
+                        });
+                        wishlistItem.itemContainer.remove();
+                        wishlist.splice(otherWishlist.indexOf(wishlistItem),1);
+                    }, function(itemID, item) {
+                        var wishlistItem = wishlist.find(function(wItem) {
+                            return wItem.id == itemID;
+                        });
+                        wishlistItem.priceLabel.innerText = " $" + item['price'];
+                        wishlistItem.nameLabel.innerText = item['name'];
+                        wishlistItem.noteLabel.innerText = item['note'];
+                        wishlistItem.url = item['url'];
+                    });
+                    popupContainer.replaceWith(otherPopupContainer);
+                });
                 allUsersContainer.appendChild(userContainer);
                 allUsersList.push({
                     user,
@@ -85,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             var searchBar = document.createElement("input");
             searchBar.setAttribute("type", "text");
+            searchBar.setAttribute("placeholder", "Find your friends...");
             searchBar.addEventListener("input", function() {
                 allUsersList.forEach(function(aUser) {
                     if (searchBar.value === "") {
