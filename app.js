@@ -61,6 +61,47 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 });
             });
+
+            var allUsersList = [];
+            var allUsersContainer = document.createElement("div");
+            allUsers(function(userID, user) {
+                var userContainer = document.createElement("div");
+                userContainer.style.display = "none";
+                nameLabel = document.createElement("label");
+                nameLabel.innerText = user.name;
+                nameLabel.style.display = "block";
+                unameLabel = document.createElement("label");
+                unameLabel.innerText = user.username;
+                unameLabel.style.display = "block";
+                userContainer.appendChild(nameLabel);
+                userContainer.appendChild(unameLabel);
+                allUsersContainer.appendChild(userContainer);
+                allUsersList.push({
+                    user,
+                    nameLabel,
+                    unameLabel,
+                    userContainer,
+                });
+            });
+            var searchBar = document.createElement("input");
+            searchBar.setAttribute("type", "text");
+            searchBar.addEventListener("input", function() {
+                allUsersList.forEach(function(aUser) {
+                    if (searchBar.value === "") {
+                        wishlistContainer.style.display = "block";
+                    } else {
+                        wishlistContainer.style.display = "none";
+                    }
+                    if (searchBar.value !== "" && aUser.user.username.includes(searchBar.value)) {
+                        aUser.userContainer.style.display = "block";
+                    } else {
+                        aUser.userContainer.style.display = "none";
+                    }
+                })
+            });
+            popupContainer.appendChild(searchBar);
+            popupContainer.appendChild(allUsersContainer);
+
             var wishlistContainer = document.createElement("div");
             popupContainer.appendChild(wishlistContainer);
             var wishlist = [];
@@ -265,20 +306,20 @@ function reserve(itemID) {
  * users whose username contains the given string.
  * @param string Search string
  */
-function findUser(string) {
+function allUsers(callbackEach = () => {}) {
     users = database.ref("/users");
     var matches = new Array();
 
     users.once("value").then(function(userList){
         userList.forEach(function(user){
-            var username = user.child("username").val();
-            if (username.includes(string))
-            {
-                matches.push(user.toJSON());
-            }
+            // var username = user.child("username").val();
+            // if (username.includes(string))
+            // {
+            callbackEach(user.key, user.toJSON());
+            // }
         })
-       });
-    return matches;
+    });
+    // toJSONreturn matches;
 }
 
 /**
