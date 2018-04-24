@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="input.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet">
+    <script src="popup.js"></script>
+</head>
+<body>
+<form id="addtowishlist">
+    <p>
+        <label for="title">Title</label><br />
+        <input type="text" id="title" name="title" size="50" value="" />
+    </p>
+    <p>
+        <label for="url">Url</label><br />
+        <input type="text" id="url" name="url" size="50" value="" />
+    </p>
+    <p>
+        <label for="price">Price</label><br />
+        <input type="text" id="price" name="price" size="50" value="" />
+    </p>
+    <p>
+        <label for="details">Details</label><br />
+        <textarea id="details" name="details" rows="6" cols="35">
+            </textarea>
+    </p>
+    <p>
+        <input id="save" type="submit" value="Save Item" />
+        <span id="status-display"></span>
+    </p>
+</form>
+</body>
+</html>

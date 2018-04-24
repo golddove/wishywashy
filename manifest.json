@@ -5,7 +5,26 @@
     "description": "WishyWashy is a google chrome gift wishlist app",
     "browser_action": {
         "default_icon": "gift.png",
-        "default_popup": "main.html"
-        
-    }
+        "default_popup": "input.html",
+        "default_title": "WishyWashy Wish List"
+    },
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "https://*/*",
+        "pageCapture",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*"
+            ],
+            "js": [
+                "select.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true
+        }
+    ]
 }
