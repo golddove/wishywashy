@@ -1,0 +1,51 @@
+body{
+    background: url("http://cleancanvas.herokuapp.com/img/backgrounds/color-splash.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.popupContainer{
+    width: 300px;
+    min-height: 300px;
+    max-height: 500px;
+}
+
+p{
+    font-family: Raleway;
+    font-size:13px;
+    font-weight:800;
+    width: 30%;
+    text-transform: uppercase;
+    float: left;
+}
+
+h1{
+    font-family: Raleway;
+    font-size:13px;
+    font-weight:800;
+    width: 30%;
+    text-transform: uppercase;
+}
+
+tr{
+    font-family: Raleway;
+    font-size:13px;
+    font-weight:800;
+    width: 30%;
+    text-transform: uppercase;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+    margin-top: 14px;
+}
+
+div{
+    margin-top: 20px;
+}
+
+input{
+    width: 200px;
+    height: 50px;
+}
