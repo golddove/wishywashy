@@ -14,7 +14,7 @@
         "tabs",
         "http://*/*",
         "https://*/*",
-        "pageCapture",
+        "pageCapture"
     ],
     "background":{
         "scripts":["background.js"],
@@ -27,18 +27,6 @@
             "https://www.googleapis.com/auth/userinfo.profile"
         ]
     },
-    "content_scripts": [
-      {
-        "matches": [
-          "http://*/*"
-        ],
-        "js": [
-          "select.js"
-        ],
-        "run_at": "document_start",
-        "all_frames": true
-      }
-    ],
     "key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh++h4Hep1smXVArptjCbyF3YTenZRmztm1EXdC+9TzghDlnJpxWqw7gqHEfyPHWxyocKqqwWl4Y4NC9t53eG+i0tHLQerwARe4hxxpCjyPMGlfikEVz1GD3CCkgy0FenSgy1C3Bf/9/FvUN1aRY5ALYkp0wbjy0SAy9aYsM9TWoPb3ekaHsjnTgUgg3Iy9CV6dhdB59H1I45pUq66Xc32cF8Iyy0Ofm6XszYATXzec+zOpOGy6FA5+8KjuyG+e0nV7oswN2z55yFXLYrNSJ+i7AfPqH6hbx+s50QOSddEOplwqJZIt+xTPjDxdi51YX/23wTXxdaAOwUsMnObJyMdwIDAQAB",
     "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'"
 

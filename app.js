@@ -54,7 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log("whaa");
                     var submittedLabel = document.createElement("label");
                     submittedLabel.innerText = "Wished!";
-                    newItemForm.replaceWith(submittedLabel);
+                    chrome.tabs.query({
+                        active : true,
+                        currentWindow : true,
+                    }, function([tab]) {
+                        console.log(tab);
+                        createItem(tab.url, nameInput.value, noteInput.value, priceInput.value, function() {
+                            newItemForm.replaceWith(submittedLabel);
+                        })
+                    });
                 });
             });
         }
@@ -132,7 +140,7 @@ function createUser() {
  * @param note
  * @param price
  */
-function createItem(url, name = "", note = "", price = 0) {
+function createItem(url, name = "", note = "", price = 0, callback = () => {}) {
     chrome.storage.sync.get(['firebase-auth-uid'], function(result){
         var uid = result['firebase-auth-uid'];
         var wishlistRef = database.ref("users/" + uid + "/wishlist");
@@ -145,7 +153,9 @@ function createItem(url, name = "", note = "", price = 0) {
             requester : uid,
             url : url,
         });
-        wishlistRef.child(newItemRef.key).set(true);
+        wishlistRef.child(newItemRef.key).set(true).then(function() {
+            callback();
+        });
     });
 }
 
