@@ -11,28 +11,48 @@ firebase.initializeApp(config)
 var database = firebase.database();
 var provider = new firebase.auth.GoogleAuthProvider();
 var firebaseAuthUid = null;
+var pageLoaded = false;
 
 document.addEventListener('DOMContentLoaded', function() {
+    if (pageLoaded) {
+        return;
+    } else {
+        pageLoaded = true;
+    }
     var googleButton = document.getElementById("googleButton");
     console.log("wtf..");
-    if(googleButton) {
-        console.log("found button");
-        googleButton.addEventListener("click", createUser);
+    chrome.storage.sync.get(['firebase-auth-uid'], function(result){
+        console.log(result);
+        var popupContainer = document.getElementById("popupContainer");
+        if(result["firebase-auth-uid"]) {
+            var addButton = document.createElement("button");
+            addButton.innerText = "Wish this Page!";
+            popupContainer.appendChild(addButton);
+        }
+        else {
+            var googleButton = document.createElement("button");
+            googleButton.innerText = "Login with Google";
+            popupContainer.appendChild(googleButton);
+            console.log("found button");
+            googleButton.addEventListener("click", createUser);
 
-        // Testing wishlistItems method
-        // console.log(wishlistItems(1));
-        // console.log(wishlistItems("FcemVZGPbyTqlnfaBJW5009NbiJ3"));
-        // console.log(wishlistItems(0));
-        // console.log(wishlistItems(2));
+            // Testing wishlistItems method
+            // console.log(wishlistItems(1));
+            // console.log(wishlistItems("FcemVZGPbyTqlnfaBJW5009NbiJ3"));
+            // console.log(wishlistItems(0));
+            // console.log(wishlistItems(2));
 
-        // Testing findUser method
-        console.log(findUser("hello"));
-        console.log(findUser("ddo"));
-        console.log(findUser("@gmail"));
-        console.log(findUser("n"));
-        console.log(findUser(""));
-    }
+            // Testing findUser method
+            console.log(findUser("hello"));
+            console.log(findUser("ddo"));
+            console.log(findUser("@gmail"));
+            console.log(findUser("n"));
+            console.log(findUser(""));
+        }
+    });
 });
+
+
 
 /**
  * Adds a new User to the Database. Assigns a
