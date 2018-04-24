@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // console.log(wishlistItems(0));
         // console.log(wishlistItems(2));
 
-
         // Testing findUser method
         console.log(findUser("hello"));
         console.log(findUser("ddo"));
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
 /**
  * Adds a new User to the Database. Assigns a
  * userID determined by the length of the current
@@ -44,8 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param email
  * @param password
  */
-function createUser()
-{
+function createUser() {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
         firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null, token)).then(function(user) {
             //firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -86,8 +83,7 @@ function createUser()
  * @param note
  * @param price
  */
-function createItem(url, name = "", note = "", price = 0)
-{
+function createItem(url, name = "", note = "", price = 0) {
     chrome.storage.sync.get(['firebase-auth-uid'], function(result){
         var uid = result['firebase-auth-uid'];
         var wishlistRef = database.ref("users/" + uid + "/wishlist");
@@ -114,8 +110,7 @@ function createItem(url, name = "", note = "", price = 0)
  * @param note
  * @param price
  */
-function editItem(itemID, url = undefined, name = undefined, note = undefined, price = undefined)
-{
+function editItem(itemID, url = undefined, name = undefined, note = undefined, price = undefined) {
     var updates = {};
     if(url) {
         updates.url = url;
