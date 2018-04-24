@@ -5,7 +5,6 @@ body{
 }
 p{
     font-family: Raleway;
-    margin-left:1.66%;
     font-size:13px;
     font-weight:800;
     width: 30%;
@@ -24,8 +23,4 @@ a{
     display: table;
     margin-left:auto;
     margin-right: auto;
-}
-
-a:nth-of-type(1){
-    padding-top: 75px;
 }
